@@ -14,7 +14,6 @@ export default function page(props: any) {
     e.preventDefault();
     try {
       const body = { name, email, username, password };
-      console.log(body);
 
       await fetch(`/api/user/users`, {
         method: "POST",

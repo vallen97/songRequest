@@ -1,6 +1,5 @@
 "use client";
 
-import Head from "next/head";
 import Link from "next/link";
 import React, { useState } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
@@ -17,7 +16,9 @@ export const Navbar: React.FC<navbarProps> = ({}) => {
           <div>
             <div className="flex items-center justify-between py-3 md:py-5 md:block">
               <Link href="#">
-                <h2 className="text-2xl text-white font-bold">NEXT JS</h2>
+                <h2 className="text-2xl text-white font-bold">
+                  Request Me a Song
+                </h2>
               </Link>
               <div className="md:hidden">
                 <button
@@ -67,15 +68,14 @@ export const Navbar: React.FC<navbarProps> = ({}) => {
                 <li className="text-white">
                   <Link href="/">Home</Link>
                 </li>
-                <li className="text-white">
-                  <Link href="/dashboard">DashBoard</Link>
-                </li>
-                <li className="text-white">
-                  <Link href="/about">About US</Link>
-                </li>
-                <li className="text-white">
-                  <Link href="/contact">Contact US</Link>
-                </li>
+                {session?.user ? (
+                  <li className="text-white">
+                    <Link href="/dashboard">DashBoard</Link>
+                  </li>
+                ) : (
+                  <></>
+                )}
+
                 {session?.user ? (
                   <>
                     <p className="text-sky-600"> {session.user.name}</p>

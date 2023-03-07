@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-head-element */
 "use client";
+import { Footer } from "@/componets/footer";
 //import "../styles/globals.css";
 import Navbar from "@/componets/navbar";
 import { SessionProvider } from "next-auth/react";
@@ -26,6 +27,7 @@ export default function RootLayout({ children, session }: IProps) {
         <SessionProvider session={session}>
           <Navbar />
           <div className="bg-zinc-200">{children}</div>
+          <Footer />
         </SessionProvider>
       </body>
     </html>

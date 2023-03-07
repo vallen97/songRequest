@@ -1,7 +1,5 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../../src/lib/prisma";
 import { NextApiRequest, NextApiResponse } from "next";
-
-const prisma = new PrismaClient();
 
 export default async function handle(
   req: NextApiRequest,
@@ -12,7 +10,6 @@ export default async function handle(
       data: {
         name: req.body.name,
         email: req.body.email,
-        username: req.body.username,
         password: req.body.password,
       },
     });
@@ -35,8 +32,15 @@ export default async function handle(
         id: req.body.id,
       },
       data: {
-        username: "Admin",
+        name: "Admin",
       },
     });
+  } else {
+    const user = await prisma.user.findUnique({
+      where: {
+        email: req.body.email,
+      },
+    });
+    return res.status(201).json(user);
   }
 }

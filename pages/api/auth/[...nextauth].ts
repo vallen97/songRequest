@@ -5,13 +5,11 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 // import TwitterProvider from "next-auth/providers/twitter"
 // import Auth0Provider from "next-auth/providers/auth0"
 // import AppleProvider from "next-auth/providers/apple"
-import EmailProvider from "next-auth/providers/email";
+// import EmailProvider from "next-auth/providers/email";
 
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../../src/lib/prisma";
 import Credentials from "next-auth/providers/credentials";
-
-const prisma = new PrismaClient();
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
@@ -19,11 +17,6 @@ export const authOptions: NextAuthOptions = {
   // https://next-auth.js.org/configuration/providers/oauth
   adapter: PrismaAdapter(prisma),
   providers: [
-    EmailProvider({
-      server: process.env.EMAIL_SERVER,
-      from: process.env.EMAIL_FROM,
-    }),
-
     Credentials({
       // The name to display on the sign in form (e.g. 'Sign in with...')
       name: "Credentials",
@@ -31,7 +24,11 @@ export const authOptions: NextAuthOptions = {
       // You can specify whatever fields you are expecting to be submitted.
       // e.g. domain, username, password, 2FA token, etc.
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
+        username: {
+          label: "email",
+          type: "text",
+          placeholder: "jsmith@email.com",
+        },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
@@ -43,17 +40,23 @@ export const authOptions: NextAuthOptions = {
         // (i.e., the request IP address)
         // NOTE: Need to use url that connects to a database,
         //       Also I might need to encrypt the passwords
-        const res = await fetch("/your/endpoint", {
-          method: "POST",
-          body: JSON.stringify(credentials),
-          headers: { "Content-Type": "application/json" },
-        });
+
+        const { username, password } = credentials as any;
+
+        // test@email.com : 123456789
+        // person2@email.com : 123456789
+
+        const res = await fetch(
+          `${process.env.NEXTAUTH_URL}/api/post/${username}`
+        );
+
         const user = await res.json();
 
-        // If no error and we have user data, return it
-        if (res.ok && user) {
-          return user;
-        }
+        if (user.password === password)
+          if (res.ok && user) {
+            // If no error and we have user data, return it
+            return user;
+          }
         // Return null if user data could not be retrieved
         return null;
       },

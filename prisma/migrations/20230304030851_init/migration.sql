@@ -1,4 +1,14 @@
 -- CreateTable
+CREATE TABLE "SongRequest" (
+    "id" SERIAL NOT NULL,
+    "songName" TEXT NOT NULL,
+    "submitter" TEXT,
+    "songURL" TEXT,
+
+    CONSTRAINT "SongRequest_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "Account" (
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
@@ -33,6 +43,7 @@ CREATE TABLE "User" (
     "email" TEXT,
     "emailVerified" TIMESTAMP(3),
     "image" TEXT,
+    "password" TEXT NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );

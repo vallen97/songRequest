@@ -1,8 +1,21 @@
-import React from "react";
+import { signIn } from "next-auth/react";
+import React, { useRef } from "react";
 
 interface loginProps {}
 
 export const Login: React.FC<loginProps> = ({}) => {
+  const email = useRef("");
+  const pass = useRef("");
+
+  const onSubmit = async () => {
+    const result = await signIn("credentials", {
+      email: email.current,
+      password: pass.current,
+      redirect: true,
+      callbackUrl: "/dashboard",
+    });
+  };
+
   return (
     <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
       <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl shadow-rose-600/40 ring ring-2 ring-purple-600 lg:max-w-xl">
@@ -14,6 +27,7 @@ export const Login: React.FC<loginProps> = ({}) => {
             <label
               htmlFor="email"
               className="block text-sm font-semibold text-gray-800"
+              onChange={(e: any) => (email.current = e.target.value)}
             >
               Email
             </label>
@@ -26,6 +40,7 @@ export const Login: React.FC<loginProps> = ({}) => {
             <label
               htmlFor="password"
               className="block text-sm font-semibold text-gray-800"
+              onChange={(e: any) => (pass.current = e.target.value)}
             >
               Password
             </label>
@@ -38,7 +53,10 @@ export const Login: React.FC<loginProps> = ({}) => {
             Forget Password?
           </a>
           <div className="mt-6">
-            <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">
+            <button
+              className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600"
+              onClick={onSubmit}
+            >
               Login
             </button>
           </div>

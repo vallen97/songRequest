@@ -22,8 +22,6 @@ export default async function handle(
     // res.json(result);
     return res.status(200).json(result);
   } else if (req.method === "DELETE") {
-    console.log("API DELETE songrequest:", req.body.id);
-
     const result = await prisma.songRequest.delete({
       where: {
         id: req.body.id,
