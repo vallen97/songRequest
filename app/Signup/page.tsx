@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Router from "next/router";
 
 export default function page(props: any) {
@@ -25,6 +25,7 @@ export default function page(props: any) {
       console.error(error);
     }
   };
+
   return (
     <div>
       <div className="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0 bg-gray-50">

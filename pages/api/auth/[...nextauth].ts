@@ -10,6 +10,7 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "../../../src/lib/prisma";
 import Credentials from "next-auth/providers/credentials";
+import bcrypt from "bcrypt";
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
@@ -45,20 +46,49 @@ export const authOptions: NextAuthOptions = {
 
         // test@email.com : 123456789
         // person2@email.com : 123456789
-
+        // bcrypt@email.com : 123456789 , $2b$10$sCWgIRc49ivcW.3vKGyL3u7owKH0kGxftlGKGQygKDcaKV7aHfNzG
+        console.log("password: ", password);
         const res = await fetch(
           `${process.env.NEXTAUTH_URL}/api/post/${username}`
         );
 
         const user = await res.json();
+        console.log("user.password: ", user.password);
+        const hash = await bcrypt.hash(password, 10);
+        console.log("hash: ", hash);
 
-        if (user.password === password)
-          if (res.ok && user) {
-            // If no error and we have user data, return it
-            return user;
-          }
-        // Return null if user data could not be retrieved
+        const isSamePass = await bcrypt
+          .compare(password, user.password)
+          .then(function (result: boolean) {
+            return result;
+          });
+
+        console.log("passwords are the same: ", isSamePass);
+
+        if (res.ok && user && isSamePass) {
+          // If no error and we have user data, return it
+          return user;
+        }
         return null;
+
+        // if (user.password === hash) if (res.ok && user) return user;
+        // return null;
+
+        bcrypt
+          .compare(password, user.password)
+          .then(function (result: boolean) {
+            console.log("result: ", result);
+            if (result == true) {
+              if (res.ok && user) {
+                // If no error and we have user data, return it
+                return user;
+              }
+              // Return null if user data could not be retrieved
+              return null;
+            }
+            return null;
+          });
+        // return null;
       },
     }),
 
