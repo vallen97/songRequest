@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Router from "next/router";
 
-export default function page(props: any) {
+export default function Pagecls(props: any) {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
