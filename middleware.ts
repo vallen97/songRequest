@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
   let cookie = request.cookies.get("next-auth.session-token");
-  // console.log(request.url);
+
   //  If there is no user signeg in
   // if (!cookie) {
   //   // if a request is made to any url but two give them an error

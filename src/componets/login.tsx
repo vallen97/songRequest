@@ -1,9 +1,10 @@
+"use client";
 import { signIn } from "next-auth/react";
 import React, { useRef } from "react";
 
-interface loginProps {}
+interface loginProps { }
 
-export const Login: React.FC<loginProps> = ({}) => {
+export const Login: React.FC<loginProps> = ({ }) => {
   const email = useRef("");
   const pass = useRef("");
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Router from "next/router";
 
 export default function page(props: any) {
@@ -104,13 +104,9 @@ export default function page(props: any) {
               </div>
             </div>
             <div className="flex items-center justify-end mt-4">
-              <span>
-                Make sure to encrypt the passwords before they are sent to the
-                database
-              </span>
               <a
                 className="text-sm text-gray-600 underline hover:text-gray-900"
-                href="#"
+                href="/Signin"
               >
                 Already registered?
               </a>

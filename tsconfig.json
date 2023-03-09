@@ -24,6 +24,20 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "pages/api/auth/[...nextauth].ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "pages/api/auth/[...nextauth].ts",
+    "app/layout.tsx",
+    ".next/types/**/*.ts"
+, "app/dashboard/page.tsx", "app/auth/page.tsx"  ],
+  "exclude": [
+    "node_modules",
+    "app/layout.tsx",
+    "app/Signin/page.tsx",
+    "src/componets/login.tsx",
+    "app/auth"
+  ]
 }

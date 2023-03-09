@@ -24,6 +24,7 @@ export const authOptions: NextAuthOptions = {
       // The credentials is used to generate a suitable form on the sign in page.
       // You can specify whatever fields you are expecting to be submitted.
       // e.g. domain, username, password, 2FA token, etc.
+
       credentials: {
         username: {
           label: "email",
@@ -33,29 +34,13 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        // You need to provide your own logic here that takes the credentials
-        // submitted and returns either a object representing a user or value
-        // that is false/null if the credentials are invalid.
-        // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
-        // You can also use the `req` object to obtain additional parameters
-        // (i.e., the request IP address)
-        // NOTE: Need to use url that connects to a database,
-        //       Also I might need to encrypt the passwords
-
         const { username, password } = credentials as any;
 
-        // test@email.com : 123456789
-        // person2@email.com : 123456789
-        // bcrypt@email.com : 123456789 , $2b$10$sCWgIRc49ivcW.3vKGyL3u7owKH0kGxftlGKGQygKDcaKV7aHfNzG
-        console.log("password: ", password);
         const res = await fetch(
           `${process.env.NEXTAUTH_URL}/api/post/${username}`
         );
 
         const user = await res.json();
-        console.log("user.password: ", user.password);
-        const hash = await bcrypt.hash(password, 10);
-        console.log("hash: ", hash);
 
         const isSamePass = await bcrypt
           .compare(password, user.password)
@@ -63,32 +48,11 @@ export const authOptions: NextAuthOptions = {
             return result;
           });
 
-        console.log("passwords are the same: ", isSamePass);
-
         if (res.ok && user && isSamePass) {
           // If no error and we have user data, return it
           return user;
         }
         return null;
-
-        // if (user.password === hash) if (res.ok && user) return user;
-        // return null;
-
-        bcrypt
-          .compare(password, user.password)
-          .then(function (result: boolean) {
-            console.log("result: ", result);
-            if (result == true) {
-              if (res.ok && user) {
-                // If no error and we have user data, return it
-                return user;
-              }
-              // Return null if user data could not be retrieved
-              return null;
-            }
-            return null;
-          });
-        // return null;
       },
     }),
 

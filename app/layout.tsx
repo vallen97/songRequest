@@ -1,28 +1,31 @@
 /* eslint-disable @next/next/no-head-element */
 "use client";
 import { Footer } from "@/componets/footer";
-//import "../styles/globals.css";
 import Navbar from "@/componets/navbar";
+import { LayoutProps } from "framer-motion";
 import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
+import { EntryType } from "perf_hooks";
 import "../styles/globals.css";
 import "./output.css";
 
 interface IProps {
   children: React.ReactNode;
-  session: any;
+  session: EntryType;
 }
 
-export default function RootLayout({ children, session }: IProps) {
+export default function RootLayout({ children, session }: any) {
   return (
     <html lang="en" className="h-screen">
       <Head>
-        <title>My page title</title>
-        <meta property="og:title" content="My page title" key="title" />
+        <title>Requst Me a Song</title>
+        <meta
+          property="Request Me a Song"
+          content="Song Requester"
+          key="Requst Me a Song"
+        />
       </Head>
-      <Head>
-        <meta property="og:title" content="My new title" key="title" />
-      </Head>
+
       <body className="h-screen">
         <SessionProvider session={session}>
           <Navbar />
