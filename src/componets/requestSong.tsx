@@ -17,7 +17,7 @@ export const RequestSong: React.FC<requestSongProps> = ({}) => {
     try {
       const body = { songName, submitter, songURL };
 
-      await fetch(`/api/request/postRequest`, {
+      await fetch(process.env.NEXTAUTH_URL + `/api/request/postRequest`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
@@ -59,7 +59,7 @@ export const RequestSong: React.FC<requestSongProps> = ({}) => {
                 </svg>
               </div>
               <div>
-                <p className="font-bold">successful</p>
+                <p className="font-bold">Successful</p>
                 <p className="text-sm">Submission was Succesfully sumbitted</p>
               </div>
             </div>

@@ -16,7 +16,7 @@ export default function Pagecls(props: any) {
     try {
       const body = { name, email, username, password };
 
-      await fetch(`/api/user/users`, {
+      await fetch(`${process.env.NEXTAUTH_URL}/api/user/users`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),

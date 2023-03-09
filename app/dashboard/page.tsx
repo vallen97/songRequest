@@ -34,7 +34,7 @@ async function deleteRequest(id: number): Promise<void> {
   try {
     const body = {};
 
-    await fetch(`/api/request/requests`, {
+    await fetch(`${process.env.NEXTAUTH_URL}/api/request/requests`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: id }),
@@ -48,7 +48,7 @@ async function deleteUser(id: String): Promise<void> {
   try {
     const body = {};
 
-    await fetch(`/api/user/users`, {
+    await fetch(`${process.env.NEXTAUTH_URL}/api/user/users`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: id }),

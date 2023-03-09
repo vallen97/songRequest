@@ -2,9 +2,9 @@
 import { signIn } from "next-auth/react";
 import React, { useRef } from "react";
 
-interface loginProps { }
+interface loginProps {}
 
-export const Login: React.FC<loginProps> = ({ }) => {
+export const Login: React.FC<loginProps> = ({}) => {
   const email = useRef("");
   const pass = useRef("");
 
@@ -19,7 +19,7 @@ export const Login: React.FC<loginProps> = ({ }) => {
 
   return (
     <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
-      <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl shadow-rose-600/40 ring ring-2 ring-purple-600 lg:max-w-xl">
+      <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl shadow-rose-600/40 ring ring-purple-600 lg:max-w-xl">
         <h1 className="text-3xl font-semibold text-center text-purple-700 underline uppercase decoration-wavy">
           Sign in
         </h1>
