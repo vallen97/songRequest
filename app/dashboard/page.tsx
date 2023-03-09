@@ -92,7 +92,7 @@ export default function Dashboard() {
     return (
       <>
         <ul
-          className="w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+          className="w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
           onChange={(e: any) => {
             if (e.target.value === "users") setShowUsers(true);
             else if (e.target.value === "songs") setShowUsers(false);
@@ -148,30 +148,6 @@ export default function Dashboard() {
                 <tbody>
                   {userData.map((request: userRequest) =>
                     request.email != session.user.email ? null : (
-                      // <tr
-                      //   key={request.id.toString()}
-                      //   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                      // >
-                      //   <th
-                      //     scope="row"
-                      //     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                      //   >
-                      //     {request.name}
-                      //   </th>
-                      //   <td className="px-6 py-4">{request.username}</td>
-
-                      //   <td className="px-6 py-4">
-                      //     <button
-                      //       className="text-red-500 hover:text-red-700"
-                      //       onClick={() => {
-                      //         deleteUser(request.id);
-                      //         fetchRequestedUsers();
-                      //       }}
-                      //     >
-                      //       Delete
-                      //     </button>
-                      //   </td>
-                      // </tr>
                       <tr
                         key={request.id.toString()}
                         className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
