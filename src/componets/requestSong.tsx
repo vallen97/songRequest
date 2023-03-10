@@ -17,11 +17,15 @@ export const RequestSong: React.FC<requestSongProps> = ({}) => {
     try {
       const body = { songName, submitter, songURL };
 
-      await fetch(process.env.NEXTAUTH_URL + `/api/request/postRequest`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
+      await fetch(
+        `https://songrequest-production.up.railway.app/api/request/postRequest`,
+        {
+          // await fetch(process.env.NEXTAUTH_URL + `/api/request/postRequest`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        }
+      );
 
       setSuccess(true);
       await delay(5000);
