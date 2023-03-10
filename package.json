@@ -5,9 +5,13 @@
   "scripts": {
     "dev": "concurrently \"next dev\" \"tailwindcss --input ./styles/globals.css --output ./app/output.css --watch\" && --turbo",
     "migrate": "prisma migrate deploy",
-    "build": "tailwindcss ./styles/globals.css --output ./app/output.css && next build",
+    "build": "yarn migrate:deploy && tailwindcss ./styles/globals.css --output ./app/output.css && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "migrate:dev": "prisma migrate dev",
+    "migrate:deploy": "prisma migrate deploy",
+    "migrate:status": "prisma migrate status",
+    "generate": "prisma generate"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.5",
