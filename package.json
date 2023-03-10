@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "concurrently \"next dev\" \"tailwindcss --input ./styles/globals.css --output ./app/output.css --watch\" && --turbo",
-    "migrate": "prisma migrate dev --name init",
+    "migrate": "prisma migrate deploy",
     "build": "tailwindcss ./styles/globals.css --output ./app/output.css && next build",
     "start": "next start",
     "lint": "next lint"
