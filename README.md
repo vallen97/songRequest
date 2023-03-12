@@ -37,4 +37,6 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-Live: nextjs-production-bb92.up.railway.app
+This application uses [Nextjs 13](https://nextjs.org/), [tailwind]CSS(https://tailwindcss.com/), and [PostgreSQL](https://www.postgresql.org/).
+
+Live: (nextjs-production-bb92.up.railway.app)
