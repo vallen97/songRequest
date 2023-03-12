@@ -39,4 +39,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 This application uses [Nextjs 13](https://nextjs.org/), [tailwindCSS](https://tailwindcss.com/), and [PostgreSQL](https://www.postgresql.org/).
 
-Live: (nextjs-production-bb92.up.railway.app)
+[Live:](nextjs-production-bb92.up.railway.app)
