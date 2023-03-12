@@ -85,12 +85,7 @@ export const Navbar: React.FC<navbarProps> = ({}) => {
                   </>
                 ) : (
                   <>
-                    <button className="text-white" onClick={() => signIn()}>
-                      Sign In
-                    </button>
-                    <li className="text-white">
-                      <Link href="/Signup">Sign Up</Link>
-                    </li>
+
                   </>
                 )}
               </ul>
